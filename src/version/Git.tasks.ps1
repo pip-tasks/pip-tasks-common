@@ -53,3 +53,17 @@ task GitGetChangedComponents {
         }
     }
 }
+
+# Synopsis: Sets tag and pushes it to remote git repository
+task GitSetTag {
+    assert ($Tag -ne $null) "Tag is not set"
+
+    Set-GitTag -Path . -Tag $Tag
+}
+
+# Synopsis: Removes tag from local and remote git repository
+task GitRemoveTag {
+    assert ($Tag -ne $null) "Tag is not set"
+
+    Remove-GitTag -Path . -Tag $Tag
+}

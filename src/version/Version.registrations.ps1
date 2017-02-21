@@ -18,3 +18,5 @@ Register-DeclarativeTask -Task Pull -Variable VersionControl -Value git -CallFil
 Register-DeclarativeTask -Task Push -Variable VersionControl -Value git -CallFile $gittasks -CallTask GitPush -Component -Workspace
 Register-DeclarativeTask -Task Undo -Variable VersionControl -Value git -CallFile $gittasks -CallTask GitUndo -Component -Workspace
 Register-DeclarativeTask -Task Clone -Variable VersionControl -Value git -CallFile $gittasks -CallTask GitClone -Workspace
+Register-DeclarativeTask -Task SetTag -Variable VersionControl -Value git -CallFile $gittasks -CallTask GitSetTag -Component -Workspace
+Register-DeclarativeTask -Task RemoveTag -Variable VersionControl -Value git -CallFile $gittasks -CallTask GitRemoveTag -Component -Workspace

@@ -74,7 +74,7 @@ PS> Pop-GitChanges -Path .
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
         [string] $Path = '.'
     )
     begin {}
@@ -116,10 +116,10 @@ PS> Push-GitChanges -Path "./Integration.Adapter" -Message "Minor changes"
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
         [string] $Path = '.',
 
-        [Parameter(Mandatory=$true, Position=0, ValueFromPipeline=$false, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$true, Position=1, ValueFromPipeline=$false, ValueFromPipelineByPropertyName=$true)]
         [string] $Message
     )
     begin {}
@@ -162,7 +162,7 @@ PS> Get-GitChanges -Path .
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
         [string] $Path = '.'
     )
     begin {}
@@ -253,7 +253,7 @@ PS> Test-GitChanges -Path .
     [CmdletBinding()]
     param
     (
-        [Parameter(Mandatory=$false, Position=0, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
         [string] $Path = '.'
     )
     begin {}
@@ -263,6 +263,94 @@ PS> Test-GitChanges -Path .
             #$diff = Invoke-External { git diff --stat --minimal } "Failed to check diff from git"
             $diff = git diff --stat --minimal
             return $diff -ne $null -and $diff -ne ''
+        }
+    }
+    end {}
+}
+
+
+function Set-GitTag
+{
+<#
+.SYNOPSIS
+
+Sets tag and pushes it to remote git repository
+
+.DESCRIPTION
+
+Set-GitTag sets tag and pushes it to remove git repository
+
+.PARAMETER Path
+
+The Path to git local repository (default: .)
+
+.PARAMETER Tag
+
+Tag to be set
+
+.EXAMPLE
+
+PS> Set-GitTag -Path . -Tag V1.1.0
+
+#>
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
+        [string] $Path = '.',
+        [Parameter(Mandatory=$true, Position=1, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string] $Tag
+    )
+    begin {}
+    process 
+    {
+        Invoke-At $Path {
+            git tag $Tag
+            git push --tags
+        }
+    }
+    end {}
+}
+
+
+function Remove-GitTag
+{
+<#
+.SYNOPSIS
+
+Removes tag from local and remote git repositories
+
+.DESCRIPTION
+
+Remove-GitTag removes tag from local and remote git repositories
+
+.PARAMETER Path
+
+The Path to git local repository (default: .)
+
+.PARAMETER Tag
+
+Tag to be removed
+
+.EXAMPLE
+
+PS> Remove-GitTag -Path . -Tag V1.1.0
+
+#>
+    [CmdletBinding()]
+    param
+    (
+        [Parameter(Mandatory=$false, Position=0, ValueFromPipelineByPropertyName=$true)]
+        [string] $Path = '.',
+        [Parameter(Mandatory=$true, Position=1, ValueFromPipeline=$true, ValueFromPipelineByPropertyName=$true)]
+        [string] $Tag
+    )
+    begin {}
+    process 
+    {
+        Invoke-At $Path {
+            git tag -d $Tag
+            git push --tags
         }
     }
     end {}
