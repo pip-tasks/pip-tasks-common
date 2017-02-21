@@ -1,31 +1,21 @@
 # <img src="https://github.com/pip-tasks/pip-tasks-ps/raw/master/artifacts/logo.png" alt="Pip.Devs Logo" style="max-width:30%"> <br/> Common build tasks for Pip.Tasks
 
-This Powershell module brings commonly used build tasks into the Pip.Tasks build system
+This Powershell module contains common tasks [Pip.Tasks](https://github.com/pip-tasks/pip-tasks-ps) that can be use in components implemented in different languages.
 
-**Git** tasks turned on by property **$VersionControl = 'git'**
-* **Clone** - cloning Git component repositories in workspace. Repositories are stored as array in **VersionControlRepos** property
+### Git version control tasks
+
+Git tasks:
+* **Clone** - cloning Git component repositories in workspace. Repositories are defined in **VersionControlRepos** variable
 * **GetChangedComponents** - lists all components with pending changed in the workspace 
 * **GetChanges** - lists of changes in git repository
 * **Pull** - pulls changes from remote git repository
-* **Push** - commits changes with comment defined by **Message** property and pushes them to remote git repository
+* **Push** - commits changes and pushes them to remote git repository
+  - **Message** - comment for 
 * **Undo** - reverts all changes in local git repository
 
-**NPM** tasks turned on by property **$Package = 'npm'**
-* **CleanDep** - cleans packages with NPM dependencies
-* **RestoreDep** - downloads NPM packages references by projects 
-* **UpdateDep** - updates selected package or all packages from specified source to the latest compatible version
-
-**Bower** tasks turned on by property **$Package = 'bower'**
-* **CleanDep** - cleans packages with Bower dependencies
-* **RestoreDep** - downloads Bower packages references by projects 
-* **UpdateDep** - updates selected package or all packages from specified source to the latest compatible version
-
-**Gulp** tasks turned on by property **$Build = 'gulp'**
-* **Clean** - cleans projects with Gulp (gulp clean)
-* **Build** - builds projects  with Gulp (gulp clean)
-* **Rebuild** - rebuilds projects with Gulp (gulp rebuild)
-* **Watch** - watches for changes in projects and builds them with Gulp (gulp watch)
-* **Run** - runs projects with Gulp (gulp launch)
+Git configuration variables:
+* **VersionControl** - Turns on git tasks (must be 'git')
+* **VersionControlRepos** - List with URLs of git repositories for **Clone** task
 
 ## Installation
 
@@ -35,8 +25,43 @@ This Powershell module brings commonly used build tasks into the Pip.Tasks build
 
 ## Usage
 
-TBD...
+A typical usage scenario to with common tasks:
+
+* Set a default workspace
+```powershell
+> Use-Workspace -Path <path to workspace>
+```
+
+* Clone component repositories
+```powershell
+> Invoke-Task -Task Clone -Workspace
+```
+
+* Pull latest changes for all components
+```powershell
+> Invoke-Task -Task Pull -All
+```
+
+* Get changed components
+```powershell
+> Invoke-Task -Task GetChangedComponents -Workspace
+```
+
+* Get changes across all components
+```powershell
+> Invoke-Task -Task GetChanges -All
+```
+
+* Undo uncommited changed for component1
+```powershell
+> Invoke-Task -Task Undo -Component component1
+```
+
+** Commit and push changes for across all components and workspace
+```powershell
+> Invoke-Task -Task Push -Message "My changes" -Global
+```
 
 ## Acknowledgements
 
-This module created and maintained by **Sergey Seroukhov** and **Volodymyr Tkachenko**.
+This module created and maintained by **Sergey Seroukhov**.
