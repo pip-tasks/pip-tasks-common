@@ -1,6 +1,6 @@
 ########################################################
 ##
-## pip-tasks-common-ps.psm1
+## pip-tasks-common.psm1
 ## Pip.Tasks.Common - Common build tasks for Pip.Tasks
 ## Startup module
 ##

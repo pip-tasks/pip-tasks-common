@@ -27,7 +27,7 @@ Uri of the component repository
 
 .EXAMPLE
 
-PS> Out-GitRepo -Path . -Uri "https://github.com/pip-tasks/pip-tasks-ps.git"
+PS> Out-GitRepo -Path . -Uri "https://github.com/pip-tasks/pip-tasks.git"
 
 #>
     [CmdletBinding()]

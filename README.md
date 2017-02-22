@@ -1,6 +1,6 @@
-# <img src="https://github.com/pip-tasks/pip-tasks-ps/raw/master/artifacts/logo.png" alt="Pip.Devs Logo" style="max-width:30%"> <br/> Common build tasks for Pip.Tasks
+# <img src="https://github.com/pip-tasks/pip-tasks/raw/master/artifacts/logo.png" alt="Pip.Devs Logo" style="max-width:30%"> <br/> Common build tasks for Pip.Tasks
 
-This Powershell module contains common tasks [Pip.Tasks](https://github.com/pip-tasks/pip-tasks-ps) that can be use in components implemented in different languages.
+This Powershell module contains common tasks [Pip.Tasks](https://github.com/pip-tasks/pip-tasks) that can be use in components implemented in different languages.
 
 ### Git version control tasks
 
@@ -19,9 +19,9 @@ Git configuration variables:
 
 ## Installation
 
-* Checkout **pip-tasks-ps** and **pip-tasks-common-ps** modules
+* Checkout **pip-tasks** and **pip-tasks-common** modules
 * Add folder with the modules to **PSModulePath**
-* Import **pip-tasks-common-ps** module. **pip-tasks-ps** will be imported automatically
+* Import **pip-tasks-common** module. **pip-tasks** will be imported automatically
 
 ## Usage
 
