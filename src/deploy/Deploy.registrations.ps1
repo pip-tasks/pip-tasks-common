@@ -6,6 +6,14 @@
 ##
 #######################################################
 
+$ptasks = "$PSScriptRoot/../utilities/Process.tasks.ps1"
+
+# Registrations for declarative tasks
+Register-DeclarativeTask -Task Deploy -Variable Deploy -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component
+Register-DeclarativeTask -Task Undeploy -Variable Deploy -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component
+Register-DeclarativeTask -Task GetDeployedComponents -Variable Deploy -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component
+Register-DeclarativeTask -Task ResetServer -Variable Deploy -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component
+
 # $dtasks = "$PSScriptRoot/Docker.tasks.ps1"
 
 # # Registrations for imperative tasks

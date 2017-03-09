@@ -6,6 +6,19 @@
 ##
 #######################################################
 
+$ptasks = "$PSScriptRoot/../utilities/Process.tasks.ps1"
+
+# Registrations for declarative tasks
+Register-DeclarativeTask -Task GetChangedComponents -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task GetChanges -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task Pull -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task Push -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task Undo -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task Clone -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task SetTag -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+Register-DeclarativeTask -Task RemoveTag -Variable VersionControl -Value process -CallFile $ptasks -CallTask ProcessInvoke -Component -Workspace
+
+
 $gittasks = "$PSScriptRoot/Git.tasks.ps1"
 
 # Registrations for imperative tasks
