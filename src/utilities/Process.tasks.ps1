@@ -34,7 +34,5 @@ task ProcessInvoke {
     $check = $true
     if ($checkVar -ne $null) { $check = $checkVar.value }
 
-    ">> $path/$command $arguments $check"
-
     Invoke-Process -Path $path -Command $command -Argument $arguments -ErrorCheck $check
 }
